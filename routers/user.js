@@ -1,21 +1,25 @@
-//MySQL User Login via named 'local-login 'strategy
-
+const express = require('express')
+const router = express.Router()
 const passport = require('passport')
-const Strategy = require('passport-local').Strategy
-const User = require('../persistence/user')
 
-// MySQL User Signup via named 'local-signup 'strategy
-passport.use(
-  'local-signup',
-  new Strategy(
-    {
-      usernameField: 'username',
-      passwordField: 'password',
-      passReqToCallback: true, // allows us to pass back the entire request to the callback
-    },
-    (req, username, password, callback) => {
-      // Find a user whose username is the same as the forms username
-      // Check to see if the user trying to login already exists
+router.post('/signup', (req, res) => {
+  passport.authenticate('local-signup', (err, user) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(user)
     }
-  )
-)
+  })(req, res)
+})
+
+router.post('/login', (req, res) => {
+  passport.authenticate('local-login', (err, user) => {
+    if (err) {
+      res.send({ status: 'failed', message: err })
+    } else {
+      res.send({ status: 'success', message: 'Logged in succesfully!' })
+    }
+  })(req, res)
+})
+
+module.exports = router
