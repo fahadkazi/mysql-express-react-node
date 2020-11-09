@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const http = require('http')
 const bodyParser = require('body-parser')
+const { sha512 } = require('./utility/index')
 
 app.use(bodyParser.json())
 app.use(bodyParser.raw())
