@@ -45,11 +45,11 @@ class User {
   }
 
   login(req, username, password, callback) {
+    console.log('username', username)
     let clienterr
     const query = `SELECT * from users WHERE username = ?`
     const params = [username]
     mysql.query(query, params, (err, res) => {
-      console.log('res pass', res[0].password)
       console.log('pass', password)
       if (err) {
         clienterr = err

@@ -1,9 +1,11 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const http = require('http')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.raw())
 // Load env from file for dev. Set NODE_ENV in your bashrc or zshrc.

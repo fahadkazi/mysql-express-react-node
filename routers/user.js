@@ -14,6 +14,7 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', (req, res) => {
   passport.authenticate('local-login', (err, user) => {
+    console.log(err, user)
     if (err) {
       res.send({ status: 'failed', message: err })
     } else {
